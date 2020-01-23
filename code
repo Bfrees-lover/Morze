@@ -1,0 +1,62 @@
+Morse = {"a": ".-", 'b': "-...", "c": "-.-.", 'd': "-..", "e": ".", "f": "..-.", "g": "--.",
+         "h": "....", 'i': "..", "j": ".---", "k": "-.-", "l": ".-..", "m": "--", "n": "-.",
+         "o": "---", "p": ".--.", "q": "--.-", "r": ".-.", "s": "...", "t": "-", "v": "...-",
+         "u": "..-", "w": ".--", "x": "-..-", "y": "-.--", "z": "--..", " ": " "}
+demorse = {".-": "a", '-...': "b", "-.-.": "c", '-..': "d", ".": "e", "..-.": "f", "--.": "g",
+           "....": "h", '..': "i", ".---": "j", "-.-": "k", ".-..": "l", "--": "m", "-.": "n",
+           "---": "o", ".--.": "p", "--.-": "q", ".-.": "r", "...": "s", "-": "t", "...-": "v",
+           "..-": "u", ".--": "w", "-..-": "x", "-.--": "y", "--..": "z", " ": " "}
+
+
+def encode_to_morse(phrase):
+    global Morse
+    phrase = phrase.lower()
+    pl = []
+    ph = []
+    for i in range(len(phrase)):
+        if phrase[i] != " ":
+            pl.append(Morse[phrase[i]])
+        else:
+            ph.append(pl)
+            pl = []
+    ph.append(pl)
+    for i in range(len(ph)):
+        print(" ".join(ph[i]), end="  ")
+
+
+def decode_from_morse(phrase):
+    global deMorse
+    pl = []
+    ph = []
+    phrase = phrase.split("  ")
+    for j in range(len(phrase)):
+        phrase[j] = phrase[j].split(' ')
+        for i in range(len(phrase[j])):
+            if phrase[j][i] != " ":
+                pl.append(deMorse[phrase[j][i]])
+            else:
+                ph.append(pl)
+                pl = []
+        ph.append(pl)
+        for i in range(len(ph)):
+            print("".join(ph[i]), end=' ')
+
+
+def main():
+    print('Do you want to encode?')
+    fraza = input()
+    if fraza == 'yes' or fraza == 'Yes':
+        print('Enter a phrase:')
+        Morse = input()
+        encode_to_morse(Morse)
+    elif fraza == 'no' or fraza == 'No':
+        print('Do you want to decode?')
+        frazaa = input()
+        if frazaa == 'yes' or fraza == 'Yes':
+            deMorse = input()
+            decode_from_morse(deMorse)
+        elif frazaa == 'No' or frazaa == 'no':
+            print("I don't know how to help you")
+
+
+main()
